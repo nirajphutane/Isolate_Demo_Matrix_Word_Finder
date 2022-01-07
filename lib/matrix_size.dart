@@ -175,7 +175,7 @@ class _MatrixSizeState extends State<MatrixSize> {
   }
 }
 
-createMatrixElements(SendPort sendPort) async {
+void createMatrixElements(SendPort sendPort) async {
   ReceivePort receiverPort = ReceivePort();
   sendPort.send(receiverPort.sendPort);
   sendPort.send(true);
