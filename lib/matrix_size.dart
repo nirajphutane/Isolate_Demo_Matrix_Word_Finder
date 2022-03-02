@@ -124,6 +124,8 @@ class _MatrixSizeState extends State<MatrixSize> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text('Isolate', style: TextStyle(color: Colors.yellow, fontSize: 12)),
+                      SizedBox(height: 10),
                       CircularProgressIndicator(
                         value: percentage?? 0,
                         backgroundColor: Colors.indigo,
@@ -133,7 +135,7 @@ class _MatrixSizeState extends State<MatrixSize> {
                       SizedBox(height: 2),
                       Text(alphabet?? '', style: TextStyle(color: Colors.yellowAccent, fontSize: 40)),
                       SizedBox(height: 5),
-                      Text('Creating Matrix', style: TextStyle(color: Colors.yellowAccent, fontSize: 10))
+                      Text('Creating Matrix', style: TextStyle(color: Colors.yellowAccent, fontSize: 10)),
                     ],
                   ),
                 ),

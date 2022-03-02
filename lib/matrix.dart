@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AlphabetMatrix extends StatefulWidget {
 
@@ -19,9 +20,12 @@ class _AlphabetMatrixState extends State<AlphabetMatrix> {
 
   List<List<String>> matrix;
   List<int> highlightIndex = [];
+  FToast fToast;
 
   @override
   void initState() {
+    fToast = FToast();
+    fToast.init(context);
     matrix = toMatrix();
     super.initState();
   }
@@ -91,6 +95,28 @@ class _AlphabetMatrixState extends State<AlphabetMatrix> {
     List<List> hrSearchResults = horizontalSearch(alphabets);
     List<List> vrSearchResults = verticalSearch(alphabets);
     List<List> diSearchResults = diagonalSearch(alphabets);
+
+    print(alphabets);
+    print(hrSearchResults);
+    print(vrSearchResults);
+    print(diSearchResults);
+
+    if(alphabets.isNotEmpty && (hrSearchResults.isNotEmpty || vrSearchResults.isNotEmpty || diSearchResults.isNotEmpty)){
+      fToast.removeCustomToast();
+      fToast.showToast(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25.0),
+            color: Colors.black,
+          ),
+          child: Text('$word found.', style: TextStyle(color: Colors.white, fontSize: 16)),
+        ),
+        toastDuration: Duration(milliseconds: 1000),
+        gravity: ToastGravity.CENTER,
+      );
+    }
+
     findLinearIndex(hrSearchResults).listen((event) {
       setState(() {
         highlightIndex.add(event);
